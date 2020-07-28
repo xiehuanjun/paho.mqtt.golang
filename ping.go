@@ -20,7 +20,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/xiehuanjun/paho.mqtt.golang/packets"
+	"github.com/eclipse/paho.mqtt.golang/packets"
 )
 
 // keepalive - Send ping when connection unused for set period

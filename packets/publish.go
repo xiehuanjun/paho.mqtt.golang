@@ -19,10 +19,18 @@ func (p *PublishPacket) String() string {
 	return fmt.Sprintf("%s topicName: %s MessageID: %d payload: %s", p.FixedHeader, p.TopicName, p.MessageID, string(p.Payload))
 }
 
+func defFunc() {
+    fmt.Println("This is a deferred function")
+     
+    if r := recover(); r != nil {
+        fmt.Println("Recovered from panic that is: ", r)
+    }
+}
+
 func (p *PublishPacket) Write(w io.Writer) error {
 	var body bytes.Buffer
-	//var err error
-
+	var err error
+    defer defFunc()
 	body.Write(encodeString(p.TopicName))
 	if p.Qos > 0 {
 		body.Write(encodeUint16(p.MessageID))
@@ -31,8 +39,7 @@ func (p *PublishPacket) Write(w io.Writer) error {
 	packet := p.FixedHeader.pack()
 	packet.Write(body.Bytes())
 	packet.Write(p.Payload)
-	//_, err = w.Write(packet.Bytes())
-	w.Write(packet.Bytes())
+	_, err = w.Write(packet.Bytes())
 
 	return nil
 }

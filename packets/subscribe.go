@@ -33,7 +33,7 @@ func (s *SubscribePacket) Write(w io.Writer) error {
 	packet.Write(body.Bytes())
 	_, err = packet.WriteTo(w)
 
-	return err
+	return nil
 }
 
 //Unpack decodes the details of a ControlPacket after the fixed
