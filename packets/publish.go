@@ -21,7 +21,7 @@ func (p *PublishPacket) String() string {
 
 func (p *PublishPacket) Write(w io.Writer) error {
 	var body bytes.Buffer
-	var err error
+	//var err error
 
 	body.Write(encodeString(p.TopicName))
 	if p.Qos > 0 {
@@ -31,9 +31,10 @@ func (p *PublishPacket) Write(w io.Writer) error {
 	packet := p.FixedHeader.pack()
 	packet.Write(body.Bytes())
 	packet.Write(p.Payload)
-	_, err = w.Write(packet.Bytes())
+	//_, err = w.Write(packet.Bytes())
+	w.Write(packet.Bytes())
 
-	return err
+	return nil
 }
 
 //Unpack decodes the details of a ControlPacket after the fixed
