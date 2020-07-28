@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"os"
 
-	MQTT "github.com/eclipse/paho.mqtt.golang"
+	MQTT "github.com/xiehuanjun/paho.mqtt.golang"
 )
 
 /*
